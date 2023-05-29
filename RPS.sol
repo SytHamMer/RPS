@@ -136,20 +136,37 @@ contract RockPaperScissors {
         _;
     }
 
-    // Compute the outcome and pay the winner(s).
-    // Return the outcome.
+    // Compute the outcome and pay the winner(s). for only one game
+
     function getResultat() public revealPhaseEnded returns (Resultats) {
         Resultats resultat;
+        uint256 nbWinA;
+        uint256 nbWinB;
 
-        if (movePlayerA == movePlayerB) {
-            resultat = Resultats.Draw;
-        } else if ((movePlayerA == Moves.Rock     && movePlayerB == Moves.Scissors) ||
+
+        //Compare on five different games
+        for (uint256 i = 1; i<=5;i++){
+            if (movePlayerA == movePlayerB) {
+                nbWinA = nbWinA;
+                nbWinB = nbWinB;
+            } else if ((movePlayerA == Moves.Rock     && movePlayerB == Moves.Scissors) ||
                    (movePlayerA == Moves.Paper    && movePlayerB == Moves.Rock)     ||
                    (movePlayerA == Moves.Scissors && movePlayerB == Moves.Paper)    ||
                    (movePlayerA != Moves.None     && movePlayerB == Moves.None)) {
+                    nbWinA +=1;
+            } else {
+                nbWinB +=1;
+            }
+        //Compare which player won the most
+        if(nbWinA>nbWinB){
             resultat = Resultats.PlayerA;
-        } else {
+        } else if(nbWinB>nbWinA){
             resultat = Resultats.PlayerB;
+        } else {
+            resultat = Resultats.Draw;
+        }
+
+
         }
 
         address payable addrA = playerA;
