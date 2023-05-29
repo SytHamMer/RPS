@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,11 +8,22 @@
     <link rel='stylesheet' href='connexion_page.css' />
     <title>Document</title>
 </head>
+
 <body>
+    <?php
+            if(isset($_POST["username"]) && isset($_POST["password"])){
+                //header('Location: choice_page.php');
+                echo '<meta http-equiv="refresh" content="0;url=choice_page.php">';
+            }
+
+        ?>
+
+
     <div class="container_connexion">
         <div>
             <?php
                 echo '
+                <form method="POST" action="">
                 <H1 id="title">Connexion</H1><br>
                 <div id="container_info">
                     <div class="ligne">
@@ -23,14 +35,11 @@
                         <input type="password" id="password" name="password" class="textArea"><br>
                     </div>
                 </div>
-                ';
-            ?>
-            <form method="POST" action="">
+                
                 <input type="hidden" name="page" value="5">
-                <?php
-                    echo '<input type="submit" value="Connexion" name="Connexion" class="button" id="connexion">';
-                ?>
-            </form>
+                <input type="submit" value="Connexion" name="Connexion" class="button" id="connexion">
+                </form>'
+            ?>
         </div>
     </div>
 </body>
